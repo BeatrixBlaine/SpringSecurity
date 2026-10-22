@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class DemoRestController {
+public class AccountController {
 
-    @GetMapping("/test")
-    public String helloWorld() {
-        return "Hello world!";
+    @GetMapping("/myAccount")
+    public String getAccount() {
+        return "This is my account";
     }
 
 }
