@@ -11,8 +11,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.password.HaveIBeenPwnedRestApiPasswordChecker;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig {
@@ -22,6 +25,9 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(configurer ->
                 configurer
+
+                        .requestMatchers("/api/register").permitAll()
+
                         .anyRequest().authenticated()
                 );
 
@@ -35,14 +41,20 @@ public class SecurityConfig {
     }
 
     // InMemoryUserDetailsManager
-    @Bean
+    /* @Bean
     public UserDetailsService userDetailsService() {
 
         UserDetails user = User.withUsername("icad").password("{noop}12345").authorities("read").build();
         UserDetails admin = User.withUsername("admin").password("{bcrypt}$2a$12$SXPB4y./VObqKoytywYi8OU4ozTT/Z3hmOCdcJB9.3Ztj9jbxlDzq").authorities("admin").build();
 
         return new InMemoryUserDetailsManager(user, admin);
-    }
+    } */
+
+    // JdbcUsersDetailsManager
+    /* @Bean
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
+    } */
 
     // Password Encoder
     @Bean
