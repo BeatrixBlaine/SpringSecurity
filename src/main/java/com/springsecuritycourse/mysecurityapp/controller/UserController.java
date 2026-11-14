@@ -20,7 +20,6 @@ public class UserController {
     public ResponseEntity<String> registerUser(@RequestBody Customer customer) {
 
         try {
-
             Customer savedCustomer = customerService.save(customer);
 
             if(savedCustomer.getId() > 0) {
@@ -28,11 +27,8 @@ public class UserController {
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User registration failed");
             }
-
         } catch (Exception e) {
-
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-
         }
 
     }
