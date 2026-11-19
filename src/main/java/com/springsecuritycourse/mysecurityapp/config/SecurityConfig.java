@@ -1,5 +1,6 @@
 package com.springsecuritycourse.mysecurityapp.config;
 
+import com.springsecuritycourse.mysecurityapp.exception.CustomerAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.password.CompromisedPasswordChecker;
@@ -32,7 +33,8 @@ public class SecurityConfig {
                 );
 
         http.formLogin(Customizer.withDefaults());
-        http.httpBasic(Customizer.withDefaults());
+        http.httpBasic(configurer -> configurer.authenticationEntryPoint(new CustomerAuthenticationEntryPoint()));
+        http.exceptionHandling(configurer -> configurer.authenticationEntryPoint(new CustomerAuthenticationEntryPoint()));
         http.csrf(csrf -> csrf.disable());
 
         return http.build();
