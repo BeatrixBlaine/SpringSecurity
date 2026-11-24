@@ -10,7 +10,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class CustomerAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request,
@@ -25,7 +25,7 @@ public class CustomerAuthenticationEntryPoint implements AuthenticationEntryPoin
 
         response.setHeader("WWW-Authenticate", "Authentication failed");
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.setContentType("application/json:charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
 
         // response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
 
