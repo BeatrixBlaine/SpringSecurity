@@ -25,7 +25,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(configurer ->
                 configurer
-                        .requestMatchers("/api/register","/invalidSession").permitAll()
+                        .requestMatchers("/api/register","/invalidSession","/login/**","/").permitAll()
                         .anyRequest().authenticated()
                 );
 
